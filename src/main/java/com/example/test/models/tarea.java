@@ -2,17 +2,17 @@ package com.example.test.models;
 
 
 import jakarta.persistence.*;
+import org.springframework.dao.DataAccessException;
 
 import java.util.Date;
 
 @Entity
-@Table(name="tarea")
+@Table(schema="todo")
 public class tarea {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    private long id;
 
     @Column(name="nombre")
     private String nombre;
@@ -21,14 +21,15 @@ public class tarea {
     @Column(name="fecha_inicio")
     private Date fecha_inicio;
     @Column(name="fecha_fin")
-    private String fecha_fin;
+    private Date fecha_fin;
     @Column(name="estado")
     private String estado;
 
     public tarea() {
     }
 
-    public tarea(String nombre, String descripcion, Date fecha_inicio, String fecha_fin, String estado) {
+    public tarea(long id, String nombre, String descripcion, Date fecha_inicio, Date fecha_fin, String estado) {
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
@@ -36,12 +37,54 @@ public class tarea {
         this.estado = estado;
     }
 
-    public int getId() {
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+   public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setFecha_inicio(Date fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
+    }
+
+    public void setFecha_fin(Date fecha_fin) {
+        this.fecha_fin = fecha_fin;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+
+    public long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+
+    public Date getFecha_inicio() {
+        return this.fecha_inicio;
+    }
+
+    public Date getFecha_fin() {
+        return this.fecha_fin;
+    }
+
+    public String getEstado() {
+        return this.estado;
     }
 
 
