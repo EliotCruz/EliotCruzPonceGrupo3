@@ -19,6 +19,7 @@ public class ApiException {
         return message;
     }
 
+
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }

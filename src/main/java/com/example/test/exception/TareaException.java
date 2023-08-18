@@ -6,4 +6,7 @@ public class TareaException extends RuntimeException {
       super(errorMessage);
    }
 
+   public TareaException(String errorMessage, Throwable err) {
+      super(errorMessage, err);
+   }
 }
