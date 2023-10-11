@@ -1,20 +1,18 @@
 package com.example.shopall.data;
 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-
 @Entity
 @Table(name = "producto")
 public class Producto {
 
             @Id
-            @Column(name = "id", nullable = false)
+            @Column(name = "idproducto", nullable = false)
             @GeneratedValue(strategy = GenerationType.IDENTITY)
             private Integer id;
 
@@ -24,35 +22,15 @@ public class Producto {
             @Column(name = "descripcion", nullable = false)
             private String descripcion;
 
-            @Column(name = "precio", nullable = false)
-            private double precio;
+            @Column(name = "inventario", nullable = false)
+            private Integer inventario;
 
-            @Column(name = "estatus", nullable = false)
-            private boolean estatus;
+            @Column(name = "precio", nullable = false)
+            private Double precio;
 
             @ManyToOne
-            @JoinColumn(name = "categoria")
+            @JoinColumn(name = "idcategoria", nullable = false)
             private Categoria categoria;
-
-
-            @JoinTable(
-                    name = "almacen_producto",
-                    joinColumns = @JoinColumn(name = "producto_id"),
-                    inverseJoinColumns = @JoinColumn(name="almacen")
-            )
-            @ManyToMany(cascade = CascadeType.ALL)
-            private List<Almacen> almacen;
-
-
-
-            @JoinTable(
-                    name = "compra_prodcuto",
-                    joinColumns = @JoinColumn(name = "compra_id"),
-                    inverseJoinColumns = @JoinColumn(name="producto")
-            )
-            @ManyToMany(cascade = CascadeType.ALL)
-            private List<Compra> compra;
-
 
 
 }

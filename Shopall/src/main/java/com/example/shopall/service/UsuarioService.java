@@ -17,16 +17,24 @@ public class UsuarioService {
 
     public List<UsuarioDto> getAllUsuarios() {
         List<UsuarioDto> usuarios = new ArrayList<>();
-        usuarioRepository.findAll().forEach(usuario -> usuarios.add(new UsuarioDto(usuario.getId(), usuario.getUser())));
+        usuarioRepository.findAll().forEach(
+                usuario -> usuarios.add(new UsuarioDto(
+                        usuario.getId(),
+                        usuario.getNombre(),
+                        usuario.getApellidos(),
+                        usuario.getEmail()
+                ))
+        );
         return usuarios;
     }
 
     public UsuarioDto createUsuario(UsuarioDto usuarioDto) {
         Usuario usuario = new Usuario();
-        usuario.setUser(usuarioDto.getUser());
-        usuario.setPassword("123456");
+        usuario.setNombre(usuarioDto.getNombre());
+        usuario.setApellidos(usuarioDto.getApellidos());
+        usuario.setEmail(usuarioDto.getEmail());
         usuarioRepository.save(usuario);
-        return new UsuarioDto(usuario.getId(), usuario.getUser());
+        return new UsuarioDto(usuario.getId(), usuario.getNombre(), usuario.getApellidos(), usuario.getEmail());
     }
 
 }

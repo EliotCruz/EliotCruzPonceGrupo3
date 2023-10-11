@@ -18,7 +18,15 @@ public class UsuarioController {
     }
 
     @PostMapping("/createUsuario")
-    public UsuarioDto createUsuario(@RequestBody UsuarioDto usuarioDto) {
-        return usuarioService.createUsuario(usuarioDto);
+    public String createUsuario(@RequestBody UsuarioDto usuarioDto) {
+        if (usuarioDto.getNombre().isEmpty())
+            throw new RuntimeException("El nombre no puede estar vacio");
+        if (usuarioDto.getApellidos().isEmpty())
+            throw new RuntimeException("El apellido no puede estar vacio");
+        if (usuarioDto.getEmail().isEmpty())
+            throw new RuntimeException("El correo no puede estar vacio");
+        usuarioService.createUsuario(usuarioDto);
+
+        return "Usuario guardado";
     }
 }
